@@ -27,18 +27,18 @@ class tcpwrappers {
 
     # Deny everything by default.
     file { '/etc/hosts.deny':
-      owner    => 'root',
-      group    => 'root',
-      mode     => '0644',
-      content  => "ALL: ALL\n",
-      require  => Package['tcp_wrappers']
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => "ALL: ALL\n",
+      require => Package['tcp_wrappers']
     }
 
     package { 'tcp_wrappers': ensure => 'latest' }
 
     $l_to_allow = [
       'LOCAL',
-      $fqdn,
+      $::fqdn,
       'localhost.localdomain',
       join(ipaddresses(),',')
     ]
