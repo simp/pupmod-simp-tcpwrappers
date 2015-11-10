@@ -1,15 +1,16 @@
 Summary: TCPWrappers Puppet Module
 Name: pupmod-tcpwrappers
 Version: 3.0.0
-Release: 2
+Release: 3
 License: Apache License, Version 2.0
 Group: Applications/System
 Source: %{name}-%{version}-%{release}.tar.gz
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: pupmod-auditd >= 2.0.0-0
-Requires: pupmod-concat >= 2.0.0-0
+Requires: pupmod-simpcat >= 2.0.0-0
 Requires: pupmod-rsyslog >= 2.0.0-0
 Requires: pupmod-common >= 4.2.0-0
+Requires: pupmod-simplib >= 1.0.0-0
 Requires: puppet >= 3.3.0
 Buildarch: noarch
 Requires: simp-bootstrap >= 4.2.0
@@ -58,6 +59,9 @@ fi
 # Post uninstall stuff
 
 %changelog
+* Mon Nov 09 2015 Chris Tessmer <chris.tessmer@onypoint.com> - 3.0.0-3
+- migration to simplib and simpcat (lib/ only)
+
 * Fri Jan 16 2015 Trevor Vaughan <tvaughan@onyxpoint.com> - 3.0.0-2
 - Changed puppet-server requirement to puppet
 
