@@ -9,7 +9,6 @@ Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: pupmod-auditd >= 2.0.0-0
 Requires: pupmod-simpcat >= 2.0.0-0
 Requires: pupmod-rsyslog >= 2.0.0-0
-Requires: pupmod-common >= 4.2.0-0
 Requires: pupmod-simplib >= 1.0.0-0
 Requires: puppet >= 3.3.0
 Buildarch: noarch

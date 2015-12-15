@@ -19,13 +19,12 @@ define tcpwrappers::allow (
     $order = '1000',
     $svc = 'nil'
 ) {
+    validate_string($order)
+    validate_string($svc)
 
     $l_name = inline_template('<%= @name.gsub(/\s+/,"_") %>')
 
-    concat_fragment { "tcpwrappers+$order.${l_name}.allow":
+    concat_fragment { "tcpwrappers+${order}.${l_name}.allow":
       content => template('tcpwrappers/tcpwrappers.allow.erb')
     }
-
-    validate_string($order)
-    validate_string($svc)
 }
