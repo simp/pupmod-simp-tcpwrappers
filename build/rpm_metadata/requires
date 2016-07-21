@@ -1,0 +1,4 @@
+Requires: pupmod-simp-auditd >= 2.0.0-0
+Requires: pupmod-simp-rsyslog >= 2.0.0-0
+Requires: pupmod-simp-simpcat >= 2.0.0-0
+Obsoletes: pupmod-tcpwrappers-test >= 0.0.1
