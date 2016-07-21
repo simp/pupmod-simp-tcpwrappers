@@ -1,7 +1,8 @@
----
-fixtures:
-  symlinks:
-    tcpwrappers: "#{source_dir}"
-    common: "#{source_dir}/../common"
-    concat: "#{source_dir}/../concat"
-    stdlib: "#{source_dir}/../stdlib"
+--- 
+  fixtures: 
+    symlinks: 
+      common: "#{source_dir}/../common"
+      simpcat: "#{source_dir}/../simpcat"
+      simplib: "#{source_dir}/../simplib"
+      stdlib: "#{source_dir}/../stdlib"
+      tcpwrappers: "#{source_dir}"
