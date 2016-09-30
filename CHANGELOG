@@ -1,3 +1,7 @@
+* Fri Sep 30 2016 Trevor Vaughan <tvaughan@onyxpoint.com> - 5.0.0-0
+- Updated to use the version of 'simpcat' that does not conflict with
+  'puppetlabs/concat'.
+
 * Mon Nov 09 2015 Chris Tessmer <chris.tessmer@onypoint.com> - 3.0.0-3
 - migration to simplib and simpcat (lib/ only)
 
