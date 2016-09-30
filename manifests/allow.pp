@@ -24,7 +24,7 @@ define tcpwrappers::allow (
 
     $l_name = inline_template('<%= @name.gsub(/\s+/,"_") %>')
 
-    concat_fragment { "tcpwrappers+${order}.${l_name}.allow":
+    simpcat_fragment { "tcpwrappers+${order}.${l_name}.allow":
       content => template('tcpwrappers/tcpwrappers.allow.erb')
     }
 }
