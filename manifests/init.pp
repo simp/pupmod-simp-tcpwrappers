@@ -10,7 +10,7 @@
 #
 class tcpwrappers {
 
-    concat_build { 'tcpwrappers':
+    simpcat_build { 'tcpwrappers':
       order   => ['*.allow'],
       target  => '/etc/hosts.allow',
       require => Package['tcp_wrappers']
@@ -22,7 +22,7 @@ class tcpwrappers {
       mode      => '0644',
       require   => Package['tcp_wrappers'],
       audit     => content,
-      subscribe => Concat_build['tcpwrappers']
+      subscribe => Simpcat_build['tcpwrappers']
     }
 
     # Deny everything by default.

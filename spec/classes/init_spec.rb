@@ -13,7 +13,7 @@ describe 'tcpwrappers' do
         })}
 
         it do
-          is_expected.to contain_concat_build('tcpwrappers').with({
+          is_expected.to contain_simpcat_build('tcpwrappers').with({
             'order' => ['*.allow'],
             'target' => '/etc/hosts.allow',
             'require' => 'Package[tcp_wrappers]'
@@ -27,7 +27,7 @@ describe 'tcpwrappers' do
             'mode'  => '0644',
             'require' => 'Package[tcp_wrappers]',
             'audit' => 'content',
-            'subscribe' => 'Concat_build[tcpwrappers]'
+            'subscribe' => 'Simpcat_build[tcpwrappers]'
           })
         end
 

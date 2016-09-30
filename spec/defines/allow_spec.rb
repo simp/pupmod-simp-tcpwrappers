@@ -6,7 +6,7 @@ describe 'tcpwrappers::allow' do
       context "on #{os}" do
         let(:title) { 'foo_bar' }
         let(:params) { {:pattern => 'localhost'} }
-        it { is_expected.to contain_concat_fragment('tcpwrappers+1000.foo_bar.allow') }
+        it { is_expected.to contain_simpcat_fragment('tcpwrappers+1000.foo_bar.allow') }
       end
     end
   end
