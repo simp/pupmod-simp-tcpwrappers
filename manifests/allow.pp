@@ -1,30 +1,35 @@
-# == Define tcpwrappers::allow
+# Add an entry to ``/etc/hosts.allow``
 #
-# == Parameters
+# @see hosts.allow(5)
 #
-# [*pattern*]
-#   The allow pattern based on the content of the man page.
+# @name [String]
+#   The name of the service
 #
-# [*order*]
-#   The order where you want this rule to appear.  10000 is the default.  IF
-#   you don't specify an order, the rules will be listed in alphabetical
-#   order.  Defaults to 1000.
+#   * If you want more than one entry for the same service name, simply use the
+#     ``svc`` parameter and make this a descriptive name
+
+# @param pattern
+#   The allow pattern based on the content of the man page
 #
-# [*svc*]
-#   An alternate name variable for the service.  This is useful if you wish to
-#   use the same service name more than once for some reason.
+# @param order
+#   The order in which you want this rule to appear
+#
+#   * IF you don't specify an order, the rules will be listed in alphabetical
+#     order
+#
+# @param svc
+#   The name of the service
+#
+#   * This is useful if you wish to use the same service name more than once
 #
 define tcpwrappers::allow (
-    $pattern,
-    $order = '1000',
-    $svc = 'nil'
+  String           $pattern,
+  Integer          $order    = 1000,
+  Optional[String] $svc      = undef
 ) {
-    validate_string($order)
-    validate_string($svc)
-
-    $l_name = inline_template('<%= @name.gsub(/\s+/,"_") %>')
-
-    simpcat_fragment { "tcpwrappers+${order}.${l_name}.allow":
-      content => template('tcpwrappers/tcpwrappers.allow.erb')
-    }
+  concat::fragment { "tcpwrappers_${name}":
+    order   => $order,
+    target  => '/etc/hosts.allow',
+    content => template("${module_name}/tcpwrappers.allow.erb")
+  }
 }
