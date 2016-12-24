@@ -23,9 +23,9 @@
 #   * This is useful if you wish to use the same service name more than once
 #
 define tcpwrappers::allow (
-  String           $pattern,
-  Integer          $order    = 1000,
-  Optional[String] $svc      = undef
+  Variant[String,Array[String]] $pattern,
+  Integer                       $order    = 1000,
+  Optional[String]              $svc      = undef
 ) {
   concat::fragment { "tcpwrappers_${name}":
     order   => $order,
