@@ -1,31 +1,32 @@
-# == Class: tcpwrappers
-#
 # Set up tcpwrappers
 #
-# == Parameters
+# @param default_deny
+#   Add a default ``ALL: ALL`` to ``/etc/hosts.deny``
 #
-# == Authors
+# @param allow_all_local
+#   Allow connections to all services from the local system
 #
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
+#   * This includes all representations of the local system that are available
+#     via ``facter`` and shortcut notation, such as ``LOCAL``.
 #
-class tcpwrappers {
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
+#
+class tcpwrappers (
+  Boolean         $default_deny    = true,
+  Boolean         $allow_all_local = true
+){
+  package { 'tcp_wrappers': ensure => 'latest' }
 
-    simpcat_build { 'tcpwrappers':
-      order   => ['*.allow'],
-      target  => '/etc/hosts.allow',
-      require => Package['tcp_wrappers']
-    }
+  concat { '/etc/hosts.allow':
+    owner          => 'root',
+    group          => 'root',
+    mode           => '0444',
+    ensure_newline => true,
+    warn           => true,
+    require        => Package['tcp_wrappers']
+  }
 
-    file { '/etc/hosts.allow':
-      owner     => 'root',
-      group     => 'root',
-      mode      => '0644',
-      require   => Package['tcp_wrappers'],
-      audit     => content,
-      subscribe => Simpcat_build['tcpwrappers']
-    }
-
-    # Deny everything by default.
+  if $default_deny {
     file { '/etc/hosts.deny':
       owner   => 'root',
       group   => 'root',
@@ -33,18 +34,19 @@ class tcpwrappers {
       content => "ALL: ALL\n",
       require => Package['tcp_wrappers']
     }
+  }
 
-    package { 'tcp_wrappers': ensure => 'latest' }
-
-    $l_to_allow = [
+  if $allow_all_local {
+    $_local_allow = [
       'LOCAL',
-      $::fqdn,
+      $facts['fqdn'],
       'localhost.localdomain',
       join(ipaddresses(),',')
     ]
 
     tcpwrappers::allow { 'ALL':
-      pattern => join(flatten($l_to_allow),','),
-      order   => '0'
+      pattern => join(flatten($_local_allow),','),
+      order   => 0
     }
+  }
 }
