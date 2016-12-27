@@ -12,8 +12,8 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 class tcpwrappers (
-  Boolean $default_deny        = true,
-  Boolean $allow_all_local     = true
+  Boolean         $default_deny    = true,
+  Boolean         $allow_all_local = true
 ){
   package { 'tcp_wrappers': ensure => 'latest' }
 

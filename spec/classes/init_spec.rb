@@ -7,8 +7,8 @@ describe 'tcpwrappers' do
         it { is_expected.to create_class('tcpwrappers') }
 
         let (:facts) { facts.merge({
-          :fqdn => 'foo.bar.baz',
-          :interfaces => 'lo',
+          :fqdn         => 'foo.bar.baz',
+          :interfaces   => 'lo',
           :ipaddress_lo => '127.0.0.1'
         })}
 
@@ -22,9 +22,9 @@ describe 'tcpwrappers' do
 
         it do
           is_expected.to contain_file('/etc/hosts.deny').with({
-            'owner' => 'root',
-            'group' => 'root',
-            'mode' => '0644',
+            'owner'   => 'root',
+            'group'   => 'root',
+            'mode'    => '0644',
             'content' => "ALL: ALL\n",
             'require' => 'Package[tcp_wrappers]'
           })
@@ -33,7 +33,7 @@ describe 'tcpwrappers' do
         it do
           is_expected.to contain_tcpwrappers__allow('ALL').with({
             'pattern' => 'LOCAL,foo.bar.baz,localhost.localdomain,127.0.0.1',
-            'order' => 0
+            'order'   => 0
           })
         end
       end
