@@ -1,3 +1,6 @@
+* Thu Jul 06 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 6.0.1-0
+- Update puppet dependency and remove OBE pe dependency in metadata.json
+
 * Fri Dec 16 2016 Trevor Vaughan <tvaughan@onyxpoinit.com> - 6.0.0-0
 - Puppet 4 update
 - Added strong typing
