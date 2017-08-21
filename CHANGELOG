@@ -1,3 +1,6 @@
+* Fri Aug 18 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 6.0.2-0
+- Update concat version in metadata.json & build/rpm_metadata/requires
+
 * Thu Jul 06 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 6.0.1-0
 - Update puppet dependency and remove OBE pe dependency in metadata.json
 
