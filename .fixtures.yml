@@ -3,7 +3,7 @@ fixtures:
   repositories:
     concat:
       repo: "https://github.com/simp/puppetlabs-concat"
-      branch: 'simp-master'
+      ref: 3.0.0
     simplib: "https://github.com/simp/pupmod-simp-simplib"
     stdlib:
       repo: "https://github.com/simp/puppetlabs-stdlib"
