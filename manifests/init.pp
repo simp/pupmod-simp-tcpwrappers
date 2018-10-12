@@ -9,13 +9,19 @@
 #   * This includes all representations of the local system that are available
 #     via ``facter`` and shortcut notation, such as ``LOCAL``.
 #
+# @param package_ensure The ensure status of packages to be managed
+#
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 class tcpwrappers (
   Boolean $default_deny    = true,
-  Boolean $allow_all_local = true
-){
-  package { 'tcp_wrappers': ensure => 'latest' }
+  Boolean $allow_all_local = true,
+  String  $package_ensure  = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
+) {
+
+  package { 'tcp_wrappers':
+    ensure => $package_ensure
+  }
 
   concat { '/etc/hosts.allow':
     owner          => 'root',
