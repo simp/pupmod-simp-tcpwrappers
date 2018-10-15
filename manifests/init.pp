@@ -11,7 +11,7 @@
 #
 # @param package_ensure The ensure status of packages to be managed
 #
-# @author Trevor Vaughan <tvaughan@onyxpoint.com>
+# @author https://github.com/simp/pupmod-simp-tcpwrappers/graphs/contributors
 #
 class tcpwrappers (
   Boolean $default_deny    = true,
