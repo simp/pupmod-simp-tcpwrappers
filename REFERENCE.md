@@ -40,6 +40,14 @@ Allow connections to all services from the local system
 
 Default value: `true`
 
+##### `package_ensure`
+
+Data type: `String`
+
+The ensure status of packages to be managed
+
+Default value: simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })
+
 ## Defined types
 
 ### tcpwrappers::allow
