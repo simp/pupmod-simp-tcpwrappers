@@ -47,7 +47,7 @@ class tcpwrappers (
       'LOCAL',
       $facts['fqdn'],
       'localhost.localdomain',
-      join(ipaddresses(),',')
+      join(simplib::ipaddresses(),',')
     ]
 
     tcpwrappers::allow { 'ALL':

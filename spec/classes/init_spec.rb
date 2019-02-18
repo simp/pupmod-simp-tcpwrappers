@@ -2,16 +2,11 @@ require 'spec_helper'
 
 describe 'tcpwrappers' do
   context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
+    on_supported_os.each do |os, os_facts|
       context "on #{os}" do
+        let (:facts) { os_facts }
+
         it { is_expected.to create_class('tcpwrappers') }
-
-        let (:facts) { facts.merge({
-          :fqdn         => 'foo.bar.baz',
-          :interfaces   => 'lo',
-          :ipaddress_lo => '127.0.0.1'
-        })}
-
         it { is_expected.to contain_package('tcp_wrappers') }
 
         it do
@@ -32,7 +27,7 @@ describe 'tcpwrappers' do
 
         it do
           is_expected.to contain_tcpwrappers__allow('ALL').with({
-            'pattern' => 'LOCAL,foo.bar.baz,localhost.localdomain,127.0.0.1',
+            'pattern' => 'LOCAL,foo.example.com,localhost.localdomain,10.0.2.15,127.0.0.1',
             'order'   => 0
           })
         end
