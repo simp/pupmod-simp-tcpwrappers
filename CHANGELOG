@@ -1,6 +1,8 @@
 * Thu Feb 14 2019 Liz Nemsick <lnemsick.simp@gmail.com> - 6.1.1-0
 - Use simplib::ipaddresses() in lieu of ipaddresses(), a deprecated
   simplib Puppet 3 function.
+- Expanded the upper limit of the concat and stdlib Puppet module versions
+- Fixed URLs in the README.md
 
 * Fri Aug 24 2018 Nick Miller <nick.miller@onypoint.com> - 6.1.0-0
 - Add support for Puppet 5 and OEL
