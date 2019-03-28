@@ -1,5 +1,5 @@
 * Fri Mar 22 2019 Joseph Sharkey <shark.bruhaha@gmail.com> - 6.1.2-0
-- Updating old puppet 3 scope API to new API
+- Use simplib::bracketize in lieu of deprecated Puppet 3 bracketize
 
 * Tue Mar 19 2019 Liz Nemsick <lnemsick.simp@gmail.com> - 6.1.2-0
 - Use simplib::nets2ddq in lieu of deprecated Puppet 3 nets2ddq
