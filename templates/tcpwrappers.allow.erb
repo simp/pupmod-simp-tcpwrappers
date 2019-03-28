@@ -5,7 +5,7 @@ lpattern = Array.new
 Array(@pattern).flatten.each do |ptn|
   if ptn == 'any'
     lpattern.push('ALL')
-  elsif ptn !~ /[[:alpha:]]/
+  elsif ptn !~ /^[[:alpha:]]*$/
     lpattern.push(scope.call_function('simplib::bracketize',[scope.call_function('simplib::nets2ddq', [ptn])]))
   else
     lpattern.push(ptn)
