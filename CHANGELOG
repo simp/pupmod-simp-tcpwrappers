@@ -1,3 +1,6 @@
+* Fri Aug 02 2019 Robert Vincent <pillarsdotnet@gmail.com> - 6.1.3-0
+- Support puppetlabs/concat 6.x, puppetlabs/stdlib 6.x, and puppet 6.x.
+
 * Fri Mar 22 2019 Joseph Sharkey <shark.bruhaha@gmail.com> - 6.1.2-0
 - Use simplib::bracketize in lieu of deprecated Puppet 3 bracketize
 - Fix template bug that prevented some IPv6 addresses from being
