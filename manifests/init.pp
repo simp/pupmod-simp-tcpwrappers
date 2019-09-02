@@ -19,6 +19,9 @@ class tcpwrappers (
   String  $package_ensure  = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
 ) {
 
+  # TCP wrappers is not supported in RedHat 8
+  simplib::assert_metadata( $module_name )
+
   package { 'tcp_wrappers':
     ensure => $package_ensure
   }
