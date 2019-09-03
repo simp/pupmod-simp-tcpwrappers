@@ -1,3 +1,9 @@
+* Mon Sep 02 2019 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 6.1.3-0
+- RedHat 8 does not support TCP Wrappers
+- Add call to simplib:assert_metadata to check the OS
+  is supported.
+- Update upperbound of simplib.
+
 * Fri Mar 22 2019 Joseph Sharkey <shark.bruhaha@gmail.com> - 6.1.2-0
 - Use simplib::bracketize in lieu of deprecated Puppet 3 bracketize
 - Fix template bug that prevented some IPv6 addresses from being
