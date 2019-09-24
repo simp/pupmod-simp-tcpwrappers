@@ -34,4 +34,20 @@ describe 'tcpwrappers' do
       end
     end
   end
+  context 'on an unsupported Operating System' do
+    facts = {
+      :os => {
+        'name' => 'Ubuntu',
+        'release' => {
+           'major' => '14',
+           'full'  => '14.999'
+        }
+      }
+    }
+    let(:facts) { facts }
+    it 'should not create resources' do
+          is_expected.to_not  contain_concat('/etc/hosts.allow')
+          is_expected.to_not  contain_package('tcp_wrappers')
+    end
+  end
 end
