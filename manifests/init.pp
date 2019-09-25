@@ -19,43 +19,44 @@ class tcpwrappers (
   String  $package_ensure  = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
 ) {
 
-  # TCP wrappers is not supported in RedHat 8
-  simplib::assert_metadata( $module_name )
+  # Only do something if TCP wrappers is supported.
+  if simplib::module_metadata::os_supported( load_module_metadata($module_name)) {
 
-  package { 'tcp_wrappers':
-    ensure => $package_ensure
-  }
-
-  concat { '/etc/hosts.allow':
-    owner          => 'root',
-    group          => 'root',
-    mode           => '0444',
-    ensure_newline => true,
-    warn           => true,
-    require        => Package['tcp_wrappers']
-  }
-
-  if $default_deny {
-    file { '/etc/hosts.deny':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => "ALL: ALL\n",
-      require => Package['tcp_wrappers']
+    package { 'tcp_wrappers':
+      ensure => $package_ensure
     }
-  }
 
-  if $allow_all_local {
-    $_local_allow = [
-      'LOCAL',
-      $facts['fqdn'],
-      'localhost.localdomain',
-      join(simplib::ipaddresses(),',')
-    ]
+    concat { '/etc/hosts.allow':
+      owner          => 'root',
+      group          => 'root',
+      mode           => '0444',
+      ensure_newline => true,
+      warn           => true,
+      require        => Package['tcp_wrappers']
+    }
 
-    tcpwrappers::allow { 'ALL':
-      pattern => join(flatten($_local_allow),','),
-      order   => 0
+    if $default_deny {
+      file { '/etc/hosts.deny':
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => "ALL: ALL\n",
+        require => Package['tcp_wrappers']
+      }
+    }
+
+    if $allow_all_local {
+      $_local_allow = [
+        'LOCAL',
+        $facts['fqdn'],
+        'localhost.localdomain',
+        join(simplib::ipaddresses(),',')
+      ]
+
+      tcpwrappers::allow { 'ALL':
+        pattern => join(flatten($_local_allow),','),
+        order   => 0
+      }
     }
   }
 }
