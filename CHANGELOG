@@ -4,6 +4,17 @@
 - Add puppetlabs-stdlib 6 support
 - Add puppetlabs-concat 6 support
 
+* Tue Sep 24 2019 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 6.1.3-0
+- Change metadata OS version check to use new simplib check that returns
+  false or true if the OS is supported according to metadata.json.
+  If it is not supported, do nothing (instead of failing).
+
+* Mon Sep 02 2019 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 6.1.3-0
+- RedHat 8 does not support TCP Wrappers
+- Add call to simplib:assert_metadata to check the OS
+  is supported.
+- Update upperbound of simplib.
+
 * Fri Mar 22 2019 Joseph Sharkey <shark.bruhaha@gmail.com> - 6.1.2-0
 - Use simplib::bracketize in lieu of deprecated Puppet 3 bracketize
 - Fix template bug that prevented some IPv6 addresses from being

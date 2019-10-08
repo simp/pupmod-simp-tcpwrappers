@@ -27,9 +27,14 @@ define tcpwrappers::allow (
   Integer                       $order    = 1000,
   Optional[String]              $svc      = undef
 ) {
-  concat::fragment { "tcpwrappers_${name}":
-    order   => $order,
-    target  => '/etc/hosts.allow',
-    content => template("${module_name}/tcpwrappers.allow.erb")
+
+  # Only do something if TCP wrappers is supported.
+
+  if simplib::module_metadata::os_supported(load_module_metadata($module_name)) {
+    concat::fragment { "tcpwrappers_${name}":
+      order   => $order,
+      target  => '/etc/hosts.allow',
+      content => template("${module_name}/tcpwrappers.allow.erb")
+    }
   }
 }
