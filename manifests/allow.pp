@@ -29,8 +29,9 @@ define tcpwrappers::allow (
 ) {
 
   # Only do something if TCP wrappers is supported.
+  if simplib::module_metadata::os_supported( load_module_metadata($module_name),
+    { release_match => 'major'} ) {
 
-  if simplib::module_metadata::os_supported(load_module_metadata($module_name)) {
     concat::fragment { "tcpwrappers_${name}":
       order   => $order,
       target  => '/etc/hosts.allow',
