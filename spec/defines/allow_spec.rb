@@ -35,8 +35,26 @@ describe 'tcpwrappers::allow' do
     end
   end
 
+  context 'on an unsupported Operating System version' do
+    let(:facts) { {
+      :os => {
+        'name' => 'CentOS',
+        'release' => {
+           'major' => '8',
+        }
+      }
+    } }
+
+    let(:title) { 'foobar' }
+    let(:params) { {:pattern => 'localhost'} }
+
+    it 'should not create resources' do
+      is_expected.to_not contain_concat__fragment("tcpwrappers_#{title}")
+    end
+  end
+
   context 'on an unsupported Operating System' do
-    facts = {
+    let(:facts) { {
       :os => {
         'name' => 'Ubuntu',
         'release' => {
@@ -44,12 +62,13 @@ describe 'tcpwrappers::allow' do
            'full'  => '14.999'
         }
       }
-    }
-    let(:facts) { facts }
+    } }
+
     let(:title) { 'foobar' }
     let(:params) { {:pattern => 'localhost'} }
+
     it 'should not create resources' do
-       is_expected.to_not contain_concat__fragment("tcpwrappers_#{title}")
+      is_expected.to_not contain_concat__fragment("tcpwrappers_#{title}")
     end
   end
 

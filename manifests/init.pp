@@ -20,7 +20,8 @@ class tcpwrappers (
 ) {
 
   # Only do something if TCP wrappers is supported.
-  if simplib::module_metadata::os_supported( load_module_metadata($module_name)) {
+  if simplib::module_metadata::os_supported( load_module_metadata($module_name),
+    { release_match => 'major'} ) {
 
     package { 'tcp_wrappers':
       ensure => $package_ensure
