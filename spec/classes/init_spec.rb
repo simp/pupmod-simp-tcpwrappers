@@ -4,7 +4,11 @@ describe 'tcpwrappers' do
   context 'supported operating systems' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
-        let (:facts) { os_facts }
+        let (:facts) {
+          os_facts.merge({
+            :interfaces => 'eth0,lo',
+          })
+        }
 
         it { is_expected.to create_class('tcpwrappers') }
         it { is_expected.to contain_package('tcp_wrappers') }
