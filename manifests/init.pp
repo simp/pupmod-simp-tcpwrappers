@@ -49,7 +49,7 @@ class tcpwrappers (
     if $allow_all_local {
       $_local_allow = [
         'LOCAL',
-        $facts['fqdn'],
+        $facts.get('networking.fqdn'),
         'localhost.localdomain',
         join(simplib::ipaddresses(),',')
       ]
