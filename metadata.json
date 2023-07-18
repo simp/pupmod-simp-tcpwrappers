@@ -1,6 +1,6 @@
 {
   "name": "simp-tcpwrappers",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "author": "SIMP Team",
   "summary": "manages /etc/hosts.allow (/etc/hosts.deny is ALL:ALL by default)",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 6.6.0 < 8.0.0"
+      "version_requirement": ">= 8.0.0 < 9.0.0"
     },
     {
       "name": "puppetlabs/concat",
@@ -48,6 +48,12 @@
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
         "7"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8"
       ]
     }
   ]
