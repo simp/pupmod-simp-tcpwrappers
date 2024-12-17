@@ -16,7 +16,7 @@ describe 'tcpwrappers::allow' do
           let(:params) { { pattern: '2001:0db8:85a3:0000:0000:8a2e:0370:7334' } }
 
           it {
-            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")\
+            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")
               .with_content(%r{\[2001:0db8:85a3:0000:0000:8a2e:0370:7334\]})
           }
         end
@@ -26,7 +26,7 @@ describe 'tcpwrappers::allow' do
           let(:params) { { pattern: '2001:0db8:85a3:0000:0000:8a2e:0370:7334/64' } }
 
           it {
-            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")\
+            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")
               .with_content(%r{\[2001:0db8:85a3:0000:0000:8a2e:0370:7334\]/64})
           }
         end
@@ -36,7 +36,7 @@ describe 'tcpwrappers::allow' do
           let(:params) { { pattern: 'localhost myhost 129.3.0.1 2001:0db8:85a3:0000:0000:8a2e:0370:7334 2001:0db8:85a3:0000:0000:8a2e:0370:7334/64 234.216.15.14/16' } }
 
           it {
-            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")\
+            is_expected.to contain_concat__fragment("tcpwrappers_#{title}")
               .with_content(%r{localhost,myhost,129.3.0.1,\[2001:0db8:85a3:0000:0000:8a2e:0370:7334\],\[2001:0db8:85a3:0000:0000:8a2e:0370:7334\]/64,234.216.0.0/255.255.0.0})
           }
         end
