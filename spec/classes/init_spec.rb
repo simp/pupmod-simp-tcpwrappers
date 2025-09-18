@@ -5,7 +5,7 @@ describe 'tcpwrappers' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          os_facts.merge(interfaces: 'eth0,lo')
+          os_facts
         end
 
         it { is_expected.to create_class('tcpwrappers') }
@@ -30,8 +30,14 @@ describe 'tcpwrappers' do
         it do
           is_expected.to contain_tcpwrappers__allow('ALL')
             .with(
-              'pattern' => 'LOCAL,foo.example.com,localhost.localdomain,10.0.2.15,127.0.0.1',
-              'order'   => 0,
+              'pattern' => (
+                [
+                  'LOCAL',
+                  facts[:networking][:fqdn],
+                  'localhost.localdomain',
+                ] + facts[:networking][:interfaces].select { |_, v| v[:ip].is_a?(String) && !v[:ip].empty? }.map { |_, v| v[:ip] }
+              ).join(','),
+              'order' => 0,
             )
         end
       end
